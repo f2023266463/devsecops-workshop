@@ -1,0 +1,12 @@
+{
+ "name": "devsecops-app",
+ "version": "1.0.0",
+ "descreption": "DevSecOps Workshop App", 
+ "main": "index.js",
+ "scrips": {
+ "start": "node index.js"
+ },
+ "dependencies": {
+  "express": "^4.18.2"
+ }
+}

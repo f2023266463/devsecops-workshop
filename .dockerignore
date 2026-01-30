@@ -1,0 +1,7 @@
+node_module
+.git
+.gitignore
+Dockerfile
+k8s
+*.log
+.cache

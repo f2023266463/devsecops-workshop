@@ -1,0 +1,29 @@
+name: DevSecOps CI/CD
+
+on:
+  push:
+    branches: [ main ]
+jobs:
+  pipeline:
+    runs-on: self-hosted
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Generate Semantic Version
+      id: version
+      uses: paulhatch/semantic-verslon@v5.4.0
+      with:
+        tag_prefix: "v"
+        format: "${major}.${minor}.${patch}"
+        major_pattern: "BREAKING CHANGE"
+        minor_pattern: "feat"
+    - name: Print version
+      run: echo "VERSION=${{ steps.version.outputs.version }}"
+
+    - name: Build Docker Image
+      run: |
+        VERSION=${{ steps.version.outputs.version }}
+        docker build --no-cache \
+          -t ghcr.io/${{ github.repository_owner }}/devsecops-app:$VERSION \
+          -t gchr.io/${{ github.repository
